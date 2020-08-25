@@ -4,7 +4,13 @@ pipeline {
 		PATH = "${PATH}:${getTerraformPath()}"
 	}
 	stages {
-		stage('terraform init'){
+		stage('terraform destroy - dev'){
+			steps {
+				
+				sh "terraform destroy -auto-approve"
+			}
+		}
+		stage('terraform destroy - prod'){
 			steps {
 				
 				sh "terraform destroy -auto-approve"
