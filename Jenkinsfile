@@ -13,7 +13,7 @@ pipeline {
 		stage('terraform init and apply - prod'){
 			steps {
 				
-				sh "terraform apply -var-file=dev.tfvars -auto-approve"
+				sh "terraform apply -var-file=prod.tfvars -auto-approve"
 			}
 		}	
 	}

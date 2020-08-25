@@ -7,13 +7,13 @@ pipeline {
 		stage('terraform destroy - dev'){
 			steps {
 				
-				sh "terraform destroy -auto-approve"
+				sh "terraform destroy -var-file=dev.tfvars -auto-approve"
 			}
 		}
 		stage('terraform destroy - prod'){
 			steps {
 				
-				sh "terraform destroy -auto-approve"
+				sh "terraform destroy -var-file=prod.tfvars -auto-approve"
 			}
 		}
 		
