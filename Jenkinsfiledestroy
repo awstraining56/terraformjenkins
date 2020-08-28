@@ -6,13 +6,12 @@ pipeline {
 	stages {
 		stage('terraform destroy - dev'){
 			steps {
-				sh returnStatus: true, script: 'terraform workspace new dev'
+				
 				sh "terraform destroy -var-file=dev.tfvars -auto-approve"
 			}
 		}
 		stage('terraform destroy - prod'){
 			steps {
-				sh returnStatus: true, script: 'terraform workspace new prod'
 				sh "terraform destroy -var-file=prod.tfvars -auto-approve"
 			}
 		}
