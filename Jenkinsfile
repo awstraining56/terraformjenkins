@@ -1,27 +1,29 @@
-pipeline {
+pipeline{
 	agent any 
 	environment {
 		PATH = "${PATH}:${getTerraformPath()}"
+		
 	}
-	stages {
-		stage('terraform init and apply - dev'){
-			steps {
+	stages{
+		stage("terraform init and apply - dev) {
+			steps{
 				sh returnStatus: true, script: 'terraform workspace new dev'
-				sh "terraform init"
-				sh "terraform apply  -var-file=dev.tfvars -auto-approve"
+				sh "terraform init" 
+				sh "terraform apply -var-file=dev.tfvars -auto-approve"
 			}
 		}
-		stage('terraform init and apply - prod'){
-			steps {
-				sh returnStatus: true, script: 'terraform workspace new prod'
-				sh "terraform init"
+		stage("terraform init and apply - prod"){
+			stages{
+				sh returnStatus: true, script 'terraform workspace new prod'
+				sh "terraform init" 
 				sh "terraform apply -var-file=prod.tfvars -auto-approve"
 			}
-		}	
+		}
 	}
 }
 
-def getTerraformPath(){
-	def tfHome = tool name: 'terraform-12', type: 'terraform'
+def getTerraformPath() {
+	def tfHome = tool name: 'terraform-12', type: 'org.jenkinsci.plugins.terraform.TerraformInstallat:
 	return tfHome
-}	
+}
+  
